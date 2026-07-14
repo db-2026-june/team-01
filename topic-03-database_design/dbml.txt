@@ -1,0 +1,282 @@
+// You can see it here: https://dbdiagram.io/d/Fitness-6a538a5236d348d120c3ef25
+
+// ==========================================
+// ENUMS (Перелічення)
+// ==========================================
+
+Enum sex_enum {
+  male
+  female
+  other
+}
+
+Enum role_enum {
+  Administrator
+  Athlete
+  Trainer
+}
+
+Enum tier_enum {
+  Bronze
+  Silver
+  Gold
+  Platinum
+  Diamond
+}
+
+Enum contract_type_enum {
+  individual
+  salaried
+  both
+}
+
+Enum severity_level_enum {
+  mild
+  moderate
+  severe
+}
+
+Enum studio_name_enum {
+  aerobics
+  yoga
+  pilates
+  weightlifting
+  cycling
+  powerlifting
+  boxing
+  swimming_pool
+  gymnastics
+}
+
+Enum equipment_status_enum {
+  ready
+  repairing
+  occupied
+}
+
+Enum warranty_status_enum {
+  full
+  partial
+}
+
+Enum payment_status_enum {
+  unpaid
+  in_process
+  completed
+}
+
+Enum booking_status_enum {
+  planned
+  confirmed
+  completed
+  cancelled
+}
+
+
+// ==========================================
+// TABLES & RELATIONSHIPS
+// ==========================================
+
+Table UserInfo {
+  user_info_id INT [pk]
+  registration_date TIMESTAMP
+  first_name VARCHAR(50)
+  last_name VARCHAR(50)
+  date_of_birth DATE
+  phone_number VARCHAR(20)
+  sex sex_enum
+  preferred_pronouns VARCHAR(20)
+  address VARCHAR(255)
+}
+
+Table Users {
+  user_id INT [pk]
+  role role_enum
+  login VARCHAR(255)
+  password_hash VARCHAR(1024)
+  user_info_id INT [ref: > UserInfo.user_info_id] 
+}
+
+Table Athletes {
+  athlete_id INT [pk]
+  goals VARCHAR(1500)
+  user_id INT [ref: > Users.user_id]
+}
+
+Table InterestRate {
+  interest_rate_id INT [pk]
+  trainer_share_rate NUMERIC(5, 2)
+  tier_rate tier_enum
+}
+
+Table Trainers {
+  trainer_id INT [pk]
+  contract_type contract_type_enum
+  interest_rate_id INT [ref: > InterestRate.interest_rate_id]
+  user_id INT [ref: > Users.user_id]
+}
+
+Table TrainerSpecialization {
+  trainer_specialization_id INT [pk]
+  specialization_name VARCHAR(100)
+  trainer_id INT [ref: > Trainers.trainer_id]
+}
+
+Table Certifications {
+  certification_id INT [pk]
+  certification_link VARCHAR(500)
+  receiving_date DATE
+  trainer_specialization_id INT [ref: > TrainerSpecialization.trainer_specialization_id]
+}
+
+Table Achievements {
+  achievement_id INT [pk]
+  name VARCHAR(100)
+  category VARCHAR(50)
+  tier tier_enum
+  description VARCHAR(255)
+  target_value SMALLINT
+}
+
+Table AthleteAchievement {
+  athlete_achievement_id INT [pk]
+  achievement_id INT [ref: > Achievements.achievement_id]
+  athlete_id INT [ref: > Athletes.athlete_id]
+  date TIMESTAMP
+  current_state SMALLINT
+}
+
+Table BodyMetrics {
+  metric_id INT [pk]
+  date DATE
+  weight NUMERIC(4, 1)
+  athlete_id INT [ref: > Athletes.athlete_id]
+}
+
+Table HealthRestriction {
+  health_restriction_id INT [pk]
+  description VARCHAR(4000)
+  severity_level severity_level_enum
+  athlete_id INT [ref: > Athletes.athlete_id]
+}
+
+Table Nutrition {
+  nutrition_id INT [pk]
+  date DATE
+  calories SMALLINT
+  carbs_weight SMALLINT
+  fat_weight SMALLINT
+  athlete_id INT [ref: > Athletes.athlete_id]
+}
+
+Table Protein {
+  protein_id INT [pk]
+  weight SMALLINT
+  type VARCHAR(50)
+  nutrition_id INT [ref: > Nutrition.nutrition_id]
+}
+
+Table Studios {
+  studio_id INT [pk]
+  studio_name studio_name_enum
+  max_capacity INT
+  studio_status BOOLEAN
+}
+
+Table StudioType {
+  studio_type_id INT [pk]
+  activity_name VARCHAR(50)
+  studio_id INT [ref: > Studios.studio_id]
+}
+
+Table Session {
+  session_id INT [pk]
+  time_start TIMESTAMP
+  time_end TIMESTAMP
+  booking booking_status_enum
+  studio_id INT [ref: > Studios.studio_id]
+}
+
+Table AthleteSession {
+  athlete_session_id INT [pk]
+  session_id INT [ref: > Session.session_id]
+  athlete_id INT [ref: > Athletes.athlete_id]
+}
+
+Table TrainerSession {
+  trainer_session_id INT [pk]
+  trainer_id INT [ref: > Trainers.trainer_id]
+  session_id INT [ref: > Session.session_id]
+}
+
+Table Equipment {
+  equipment_id INT [pk]
+  studio_id INT [ref: > Studios.studio_id]
+  name VARCHAR(100)
+  model VARCHAR(100)
+  brand VARCHAR(100)
+  status equipment_status_enum
+  update_time TIMESTAMP
+}
+
+Table Warranty {
+  warranty_id INT [pk]
+  status warranty_status_enum
+  expiry_date DATE
+  renewal_date DATE
+  terms_link VARCHAR(500)
+  equipment_id INT [ref: - Equipment.equipment_id]
+}
+
+Table Packs {
+  pack_id INT [pk]
+  pack_name VARCHAR(100)
+  pack_type VARCHAR(50)
+  is_active BOOLEAN
+}
+
+Table PackEquipment {
+  pack_equipment_id INT [pk]
+  pack_id INT [ref: > Packs.pack_id]
+  equipment_id INT [ref: > Equipment.equipment_id]
+}
+
+Table PackSubscription {
+  pack_subscription_id INT [pk]
+  athlete_id INT [ref: > Athletes.athlete_id]
+  pack_id INT [ref: > Packs.pack_id]
+  start_date DATE
+  end_date DATE
+}
+
+Table Promocodes {
+  promocode_id INT [pk]
+  code VARCHAR(16)
+  is_active BOOLEAN
+  quantity SMALLINT
+}
+
+Table Payment {
+  payment_id INT [pk]
+  price NUMERIC(10, 2)
+  payment_method VARCHAR(50)
+  payment_date TIMESTAMP
+  amount_paid NUMERIC(10, 2)
+  payment_status payment_status_enum
+  pack_id INT [ref: > Packs.pack_id]
+  promocode_id INT [ref: > Promocodes.promocode_id]
+}
+
+Table Discounts {
+  discount_id INT [pk]
+  discount_name VARCHAR(50)
+  description VARCHAR(200)
+  start_date DATE
+  end_date DATE
+}
+
+Table PaymentDiscount {
+  payment_discount_id INT [pk]
+  discount_id INT [ref: > Discounts.discount_id]
+  payment_id INT [ref: > Payment.payment_id]
+}
