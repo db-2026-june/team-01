@@ -112,7 +112,7 @@ Table InterestRate {
 Table Trainers {
   trainer_id INT [pk]
   contract_type contract_type_enum
-  interest_rate_id INT [ref: > InterestRate.interest_rate_id]
+  interest_rate_id INT [ref: - InterestRate.interest_rate_id]
   user_id INT [ref: > Users.user_id]
 }
 
