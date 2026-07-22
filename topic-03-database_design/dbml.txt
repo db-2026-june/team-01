@@ -263,7 +263,7 @@ Table Payment {
   payment_date TIMESTAMP
   amount_paid NUMERIC(10, 2)
   payment_status payment_status_enum
-  pack_id INT [ref: > Packs.pack_id]
+  pack_subscription_id INT [ref: - PackSubscription.pack_subscription_id]
   promocode_id INT [ref: > Promocodes.promocode_id]
 }
 
