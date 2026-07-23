@@ -189,6 +189,7 @@ CREATE TABLE FitServe.athlete_achievement( -- Andriy
   date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   current_state SMALLINT,
 
+  UNIQUE (achievement_id, athlete_id),
   FOREIGN KEY (achievement_id) REFERENCES FitServe.achievements(achievement_id),
   FOREIGN KEY (athlete_id) REFERENCES FitServe.athletes(athlete_id)
 );
