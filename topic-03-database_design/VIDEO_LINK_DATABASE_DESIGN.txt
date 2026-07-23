@@ -1,0 +1,31 @@
+Variant 2 — FitServe Fitness Center Database
+
+Video link:
+https://drive.google.com/file/d/1W0m6-q9c_iiIA3_hgEyWxc22ybpNu_Ye/view?usp=sharing
+
+
+VIDEO TIMELINE
+
+Speaker 1 — Oleksii Strotskyi
+Role: Team Leader / Database Designer and Architect
+00:05–05:00 — General Database Overview
+05:00–06:10 — Personal Contribution and Main Challenges
+
+Speaker 2 — Liliia Dotsenko
+Role: Database Designer and Architect
+06:15–08:45 — Personal Contribution and Main Challenges
+
+Speaker 3 — Andriy Dehtiarov
+Role: Database Designer
+08:50–10:50 — Personal Contribution and Main Challenges
+
+Speaker 4 — Serhieieva Lidiia
+Role: Database Designer
+From 10:55 — Personal Contribution and Main Challenges
+
+Speaker 5 — Shtefutsa Oleksandr
+Status: ABSENT
+
+
+More details about the team members’ responsibilities and contributions:
+https://github.com/db-2026-june/team-01/blob/main/topic-03-database_design/TEAMWORK.md
