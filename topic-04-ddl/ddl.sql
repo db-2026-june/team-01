@@ -116,9 +116,8 @@ CREATE TABLE FitServe.user_info ( -- Oleksii
   address VARCHAR(255) NOT NULL,
 
   CONSTRAINT chk_user_info_minimum_age
-   CHECK (
-      date_of_birth <=
-      (registration_date::date - INTERVAL '14 years')::date        -- AND(role)
+    CHECK (
+      registration_date >= date_of_birth + INTERVAL '14 years'
     ) -- lily-CHECK
 );
 
