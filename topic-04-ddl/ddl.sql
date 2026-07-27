@@ -300,8 +300,6 @@ CREATE TABLE FitServe.studio_type ( -- lily
    CHECK (TRIM(activity_name) <> ''),
 
   FOREIGN KEY (studio_id) REFERENCES FitServe.studios(studio_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
 );
 
 CREATE TABLE FitServe.session ( -- lily
@@ -319,8 +317,6 @@ CREATE TABLE FitServe.session ( -- lily
    CHECK (time_end <= time_start + INTERVAL '3 hours'),
 
   FOREIGN KEY (studio_id) REFERENCES FitServe.studios(studio_id)
-    ON DELETE SET NULL
-    ON UPDATE CASCADE
 );
 
 CREATE TABLE FitServe.athlete_session ( -- lily
@@ -330,12 +326,8 @@ CREATE TABLE FitServe.athlete_session ( -- lily
   athlete_id INTEGER NOT NULL,
 
   UNIQUE (session_id, athlete_id),
-  FOREIGN KEY (session_id) REFERENCES FitServe.session(session_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  FOREIGN KEY (session_id) REFERENCES FitServe.session(session_id),
   FOREIGN KEY (athlete_id) REFERENCES FitServe.athletes(athlete_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
 );
 
 CREATE TABLE FitServe.trainer_session ( -- lily
@@ -345,12 +337,8 @@ CREATE TABLE FitServe.trainer_session ( -- lily
   session_id BIGINT NOT NULL,
 
   UNIQUE (trainer_id, session_id),
-  FOREIGN KEY (trainer_id) REFERENCES FitServe.trainers(trainer_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
+  FOREIGN KEY (trainer_id) REFERENCES FitServe.trainers(trainer_id),
   FOREIGN KEY (session_id) REFERENCES FitServe.session(session_id)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE
 );
 
 CREATE TABLE FitServe.packs ( -- Oleksii
