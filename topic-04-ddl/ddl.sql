@@ -468,4 +468,75 @@ CREATE TABLE FitServe.payment_discount ( -- Oleksii
 );
 
 
+-- =========================================================
+-- INDEXES
+-- =========================================================
+
+-- TRAINERS AND CERTIFICATIONS
+CREATE INDEX IF NOT EXISTS idx_trainer_specialization_trainer_id
+    ON FitServe.trainer_specialization (trainer_id);
+
+CREATE INDEX IF NOT EXISTS idx_trainer_specialization_name
+    ON FitServe.trainer_specialization (specialization_name);
+
+
+-- ATHLETES, PROGRESS AND HEALTH
+CREATE INDEX IF NOT EXISTS idx_athlete_achievement_athlete_id
+    ON FitServe.athlete_achievement (athlete_id);
+
+CREATE INDEX IF NOT EXISTS idx_body_metrics_athlete_date
+    ON FitServe.body_metrics (athlete_id, date DESC);
+
+CREATE INDEX IF NOT EXISTS idx_health_restriction_athlete_id
+    ON FitServe.health_restriction (athlete_id);
+
+CREATE INDEX IF NOT EXISTS idx_nutrition_athlete_date
+    ON FitServe.nutrition (athlete_id, date DESC);
+
+
+-- STUDIOS AND SESSIONS
+CREATE INDEX IF NOT EXISTS idx_studio_type_activity_name
+    ON FitServe.studio_type (activity_name);
+
+CREATE INDEX IF NOT EXISTS idx_session_active_schedule
+    ON FitServe.session (time_start, time_end, studio_id)
+    WHERE booking IN ('planned', 'confirmed');
+
+CREATE INDEX IF NOT EXISTS idx_athlete_session_athlete_session
+    ON FitServe.athlete_session (athlete_id, session_id);
+
+CREATE INDEX IF NOT EXISTS idx_trainer_session_session_trainer
+    ON FitServe.trainer_session (session_id, trainer_id);
+
+
+-- PACKS AND SUBSCRIPTIONS
+CREATE INDEX IF NOT EXISTS idx_packs_type_active
+    ON FitServe.packs (pack_type, is_active);
+
+CREATE INDEX IF NOT EXISTS idx_pack_subscription_athlete_period
+    ON FitServe.pack_subscription (athlete_id, start_date, end_date);
+
+
+-- EQUIPMENT AND WARRANTY
+CREATE INDEX IF NOT EXISTS idx_equipment_studio_status
+    ON FitServe.equipment (studio_id, status);
+
+CREATE INDEX IF NOT EXISTS idx_warranty_renewal_date
+    ON FitServe.warranty (renewal_date)
+    WHERE renewal_date IS NOT NULL;
+
+CREATE INDEX IF NOT EXISTS idx_pack_equipment_equipment_id
+    ON FitServe.pack_equipment (equipment_id);
+
+
+-- PAYMENTS AND DISCOUNTS
+CREATE INDEX IF NOT EXISTS idx_payment_status_date
+    ON FitServe.payment (payment_status, payment_date DESC);
+
+CREATE INDEX IF NOT EXISTS idx_discounts_active_period
+    ON FitServe.discounts (start_date, end_date);
+
+CREATE INDEX IF NOT EXISTS idx_payment_discount_payment_id
+    ON FitServe.payment_discount (payment_id);
+
 --DROP SCHEMA fitserve CASCADE;
