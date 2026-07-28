@@ -264,10 +264,10 @@ CREATE TABLE FitServe.nutrition( -- Andriy
    CHECK (calories >= 0), -- lily-CHECK 
 
   CONSTRAINT chk_nutrition_carbs
-   CHECK (1000 > carbs_weight >= 0), -- lily-CHECK
+   CHECK (carbs_weight >= 0 AND carbs_weight < 1000), -- lily-CHECK
 
   CONSTRAINT chk_nutrition_fat
-   CHECK (1000 > fat_weight >= 0), -- lily-CHECK
+   CHECK (fat_weight >= 0 AND fat_weight < 1000), -- lily-CHECK
 
   FOREIGN KEY (athlete_id) REFERENCES FitServe.athletes(athlete_id)
 );
@@ -279,7 +279,7 @@ CREATE TABLE FitServe.protein( -- Andriy
   nutrition_id BIGINT NOT NULL,
 
   CONSTRAINT chk_protein_weight
-   CHECK (2000 > weight > 0), -- lily-CHECK                                  !
+   CHECK (weight > 0 AND weight < 2000), -- lily-CHECK                                  !
 
   FOREIGN KEY (nutrition_id) REFERENCES FitServe.nutrition(nutrition_id)
 );
@@ -292,7 +292,7 @@ CREATE TABLE FitServe.studios ( -- lily
   studio_status BOOLEAN NOT NULL DEFAULT TRUE,
 
   CONSTRAINT chk_studios_capacity
-   CHECK (500 > max_capacity > 0) -- lily-CHECK  
+   CHECK (max_capacity > 0 AND max_capacity < 500) -- lily-CHECK  
 );
 
 CREATE TABLE FitServe.studio_type ( -- lily
