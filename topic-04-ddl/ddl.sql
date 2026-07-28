@@ -474,6 +474,235 @@ CREATE TABLE FitServe.payment_discount ( -- Oleksii
 
 
 -- =========================================================
+-- FOREIGN KEY UPDATE / DELETE RULES
+-- =========================================================
+
+ALTER TABLE FitServe.users
+    DROP CONSTRAINT IF EXISTS users_user_info_id_fkey,
+    ADD CONSTRAINT fk_users_user_info
+        FOREIGN KEY (user_info_id)
+        REFERENCES FitServe.user_info (user_info_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT;
+
+ALTER TABLE FitServe.trainers
+    DROP CONSTRAINT IF EXISTS trainers_user_id_fkey,
+    ADD CONSTRAINT fk_trainers_user
+        FOREIGN KEY (user_id)
+        REFERENCES FitServe.users (user_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.trainers
+    DROP CONSTRAINT IF EXISTS trainers_interest_rate_id_fkey,
+    ADD CONSTRAINT fk_trainers_interest_rate
+        FOREIGN KEY (interest_rate_id)
+        REFERENCES FitServe.interest_rate (interest_rate_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL;
+
+ALTER TABLE FitServe.trainer_specialization
+    DROP CONSTRAINT IF EXISTS trainer_specialization_trainer_id_fkey,
+    ADD CONSTRAINT fk_trainer_specialization_trainer
+        FOREIGN KEY (trainer_id)
+        REFERENCES FitServe.trainers (trainer_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.certifications
+    DROP CONSTRAINT IF EXISTS certifications_trainer_specialization_id_fkey,
+    ADD CONSTRAINT fk_certifications_trainer_specialization
+        FOREIGN KEY (trainer_specialization_id)
+        REFERENCES FitServe.trainer_specialization (trainer_specialization_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.athletes
+    DROP CONSTRAINT IF EXISTS athletes_user_id_fkey,
+    ADD CONSTRAINT fk_athletes_user
+        FOREIGN KEY (user_id)
+        REFERENCES FitServe.users (user_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.athlete_achievement
+    DROP CONSTRAINT IF EXISTS athlete_achievement_achievement_id_fkey,
+    ADD CONSTRAINT fk_athlete_achievement_achievement
+        FOREIGN KEY (achievement_id)
+        REFERENCES FitServe.achievements (achievement_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.athlete_achievement
+    DROP CONSTRAINT IF EXISTS athlete_achievement_athlete_id_fkey,
+    ADD CONSTRAINT fk_athlete_achievement_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.body_metrics
+    DROP CONSTRAINT IF EXISTS body_metrics_athlete_id_fkey,
+    ADD CONSTRAINT fk_body_metrics_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.health_restriction
+    DROP CONSTRAINT IF EXISTS health_restriction_athlete_id_fkey,
+    ADD CONSTRAINT fk_health_restriction_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.nutrition
+    DROP CONSTRAINT IF EXISTS nutrition_athlete_id_fkey,
+    ADD CONSTRAINT fk_nutrition_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.protein
+    DROP CONSTRAINT IF EXISTS protein_nutrition_id_fkey,
+    ADD CONSTRAINT fk_protein_nutrition
+        FOREIGN KEY (nutrition_id)
+        REFERENCES FitServe.nutrition (nutrition_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.studio_type
+    DROP CONSTRAINT IF EXISTS studio_type_studio_id_fkey,
+    ADD CONSTRAINT fk_studio_type_studio
+        FOREIGN KEY (studio_id)
+        REFERENCES FitServe.studios (studio_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.session
+    DROP CONSTRAINT IF EXISTS session_studio_id_fkey,
+    ADD CONSTRAINT fk_session_studio
+        FOREIGN KEY (studio_id)
+        REFERENCES FitServe.studios (studio_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL;
+
+ALTER TABLE FitServe.athlete_session
+    DROP CONSTRAINT IF EXISTS athlete_session_session_id_fkey,
+    ADD CONSTRAINT fk_athlete_session_session
+        FOREIGN KEY (session_id)
+        REFERENCES FitServe.session (session_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.athlete_session
+    DROP CONSTRAINT IF EXISTS athlete_session_athlete_id_fkey,
+    ADD CONSTRAINT fk_athlete_session_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.trainer_session
+    DROP CONSTRAINT IF EXISTS trainer_session_trainer_id_fkey,
+    ADD CONSTRAINT fk_trainer_session_trainer
+        FOREIGN KEY (trainer_id)
+        REFERENCES FitServe.trainers (trainer_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.trainer_session
+    DROP CONSTRAINT IF EXISTS trainer_session_session_id_fkey,
+    ADD CONSTRAINT fk_trainer_session_session
+        FOREIGN KEY (session_id)
+        REFERENCES FitServe.session (session_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.pack_subscription
+    DROP CONSTRAINT IF EXISTS pack_subscription_athlete_id_fkey,
+    ADD CONSTRAINT fk_pack_subscription_athlete
+        FOREIGN KEY (athlete_id)
+        REFERENCES FitServe.athletes (athlete_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.pack_subscription
+    DROP CONSTRAINT IF EXISTS pack_subscription_pack_id_fkey,
+    ADD CONSTRAINT fk_pack_subscription_pack
+        FOREIGN KEY (pack_id)
+        REFERENCES FitServe.packs (pack_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT;
+
+ALTER TABLE FitServe.equipment
+    DROP CONSTRAINT IF EXISTS equipment_studio_id_fkey,
+    ADD CONSTRAINT fk_equipment_studio
+        FOREIGN KEY (studio_id)
+        REFERENCES FitServe.studios (studio_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT;
+
+ALTER TABLE FitServe.warranty
+    DROP CONSTRAINT IF EXISTS warranty_equipment_id_fkey,
+    ADD CONSTRAINT fk_warranty_equipment
+        FOREIGN KEY (equipment_id)
+        REFERENCES FitServe.equipment (equipment_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.pack_equipment
+    DROP CONSTRAINT IF EXISTS pack_equipment_pack_id_fkey,
+    ADD CONSTRAINT fk_pack_equipment_pack
+        FOREIGN KEY (pack_id)
+        REFERENCES FitServe.packs (pack_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.pack_equipment
+    DROP CONSTRAINT IF EXISTS pack_equipment_equipment_id_fkey,
+    ADD CONSTRAINT fk_pack_equipment_equipment
+        FOREIGN KEY (equipment_id)
+        REFERENCES FitServe.equipment (equipment_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+ALTER TABLE FitServe.payment
+    DROP CONSTRAINT IF EXISTS payment_pack_subscription_id_fkey,
+    ADD CONSTRAINT fk_payment_pack_subscription
+        FOREIGN KEY (pack_subscription_id)
+        REFERENCES FitServe.pack_subscription (pack_subscription_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT;
+
+ALTER TABLE FitServe.payment
+    DROP CONSTRAINT IF EXISTS payment_promocode_id_fkey,
+    ADD CONSTRAINT fk_payment_promocode
+        FOREIGN KEY (promocode_id)
+        REFERENCES FitServe.promocodes (promocode_id)
+        ON UPDATE CASCADE
+        ON DELETE SET NULL;
+
+ALTER TABLE FitServe.payment_discount
+    DROP CONSTRAINT IF EXISTS payment_discount_discount_id_fkey,
+    ADD CONSTRAINT fk_payment_discount_discount
+        FOREIGN KEY (discount_id)
+        REFERENCES FitServe.discounts (discount_id)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT;
+
+ALTER TABLE FitServe.payment_discount
+    DROP CONSTRAINT IF EXISTS payment_discount_payment_id_fkey,
+    ADD CONSTRAINT fk_payment_discount_payment
+        FOREIGN KEY (payment_id)
+        REFERENCES FitServe.payment (payment_id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE;
+
+
+-- =========================================================
 -- INDEXES
 -- =========================================================
 
