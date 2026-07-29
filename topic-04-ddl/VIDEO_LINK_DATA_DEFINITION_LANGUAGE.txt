@@ -1,0 +1,29 @@
+https://drive.google.com/file/d/1fOZzPeNpm3LHfl2Rtr_BQ99fLRZ1vto6/view?usp=sharing
+
+Note:
+For the best viewing experience, please select the highest available video quality. The video is available in 1080p.
+
+
+VIDEO TIMELINE
+
+Speaker 1 — Oleksii Strotskyi
+Role: Team Lead / Responsible for DDL Integration
+00:05–01:20 — Overview of Personal Contribution and Main Challenge
+
+Speaker 2 — Andriy Dehtiarov
+Role: SQL Developer / Responsible for Referential Integrity
+01:25–02:25 — Personal Contribution and Referential Integrity Implementation
+
+Speaker 3 — Liliia Dotsenko
+Role: SQL Developer / Responsible for Constraints and Validation
+02:30–03:20 — Brief Overview of Completed Work
+03:20–06:10 — Detailed Explanation of All Constraints
+
+
+TEAM STATUS NOTE
+
+Serhieieva Lidiia and Shtefutsa Oleksandr are no longer part of the team due to inactivity and the low quality of the work delivered. Therefore, they did not participate in the preparation or presentation of this part of the project.
+
+
+More details about the team members’ responsibilities and contributions:
+https://github.com/db-2026-june/team-01/blob/main/topic-04-ddl/TEAMWORK.md
