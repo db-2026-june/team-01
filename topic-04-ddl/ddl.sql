@@ -79,7 +79,8 @@ CREATE TYPE FitServe.studio_name_enum AS ENUM ( -- lily
   'powerlifting',
   'boxing',
   'swimming_pool',
-  'gymnastics'
+  'gymnastics',
+  'climbing'
 );
 
 CREATE TYPE FitServe.booking_status_enum AS ENUM ( -- lily
