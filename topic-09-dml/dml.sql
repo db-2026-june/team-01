@@ -763,3 +763,185 @@ VALUES
   (DATE '2026-06-18', DATE '2026-07-17', 80, 8);
 
   
+
+  ---------------- Andry
+  -- 1. Studios: 10 records 
+INSERT INTO FitServe.studios (
+  studio_id,
+  studio_name,
+  max_capacity,
+  studio_status
+)
+VALUES
+  (1,  'aerobics',       40, true),
+  (2,  'yoga',            30, true),
+  (3,  'pilates',         25, true),
+  (4,  'weightlifting',   35, true),
+  (5,  'cycling',         20, true),
+  (6,  'powerlifting',    30, true),
+  (7,  'boxing',          25, true),
+  (8,  'swimming_pool',   50, true),
+  (9,  'gymnastics',      40, false),
+  (10, 'climbing',        20, true);
+
+-- 2. Studio type: 12 records 
+INSERT INTO FitServe.studio_type (
+  studio_type_id,
+  activity_name,
+  studio_id
+)
+VALUES
+  (1,  'Step Aerobics',            1),
+  (2,  'Group Aerobics',           1),
+  (3,  'Hatha Yoga',                2),
+  (4,  'Vinyasa Yoga',              2),
+  (5,  'Mat Pilates',               3),
+  (6,  'Olympic Weightlifting',     4),
+  (7,  'Indoor Cycling',            5),
+  (8,  'Spin Class',                5),
+  (9,  'Powerlifting Training',     6),
+  (10, 'Boxing Fundamentals',       7),
+  (11, 'Swim Lessons',              8),
+  (12, 'Gymnastics for Kids',       9),
+  (13, 'Indoor Climbing',           10);
+
+-- 3. Equipment: 10 records
+INSERT INTO FitServe.equipment (
+  equipment_id,
+  name,
+  model,
+  brand,
+  status,
+  update_time,
+  studio_id
+)
+VALUES
+  (1,  'Treadmill',           'TX-500',  'Technogym',    'ready',      TIMESTAMP '2026-01-10 09:00:00', 1),
+  (2,  'Stepper',             'ST-200',  'Reebok',       'ready',      TIMESTAMP '2026-01-10 09:05:00', 1),
+  (3,  'Yoga Mat Rack',       'YMR-10',  'Manduka',      'ready',      TIMESTAMP '2026-01-11 10:00:00', 2),
+  (4,  'Yoga Blocks Set',     'YB-100',  'Gaiam',        'repairing',  TIMESTAMP '2026-03-02 14:20:00', 2),
+  (5,  'Pilates Reformer',    'PR-3000', 'Balanced Body','ready',      TIMESTAMP '2026-01-12 11:00:00', 3),
+  (6,  'Barbell Rack',        'BR-700',  'Rogue',        'ready',      TIMESTAMP '2026-01-13 08:30:00', 4),
+  (7,  'Spin Bike',           'SB-450',  'Keiser',       'ready',      TIMESTAMP '2026-01-14 09:15:00', 5),
+  (8,  'Power Rack',          'PWR-900', 'Rogue',        'occupied',   TIMESTAMP '2026-06-01 17:40:00', 6),
+  (9,  'Boxing Heavy Bag',    'HB-80',   'Everlast',     'ready',      TIMESTAMP '2026-01-15 12:00:00', 7),
+  (10, 'Pool Lane Ropes',     'PLR-25',  'Speedo',       'ready',      TIMESTAMP '2026-01-16 07:50:00', 8);
+
+-- 4. Warranty: 10 records 
+INSERT INTO FitServe.warranty (
+  warranty_id,
+  warranty_status,
+  expiry_date,
+  renewal_date,
+  terms_link,
+  equipment_id
+)
+VALUES
+  (1,  'full',    DATE '2027-05-01', NULL,               'https://warranty.example.com/tx500',  1),
+  (2,  'partial', DATE '2026-12-15', NULL,               'https://warranty.example.com/st200',  2),
+  (3,  'full',    DATE '2028-01-10', DATE '2027-01-10',  'https://warranty.example.com/ymr10',  3),
+  (4,  'partial', DATE '2026-09-01', NULL,               'https://warranty.example.com/yb100',  4),
+  (5,  'full',    DATE '2029-03-01', DATE '2028-03-01',  'https://warranty.example.com/pr3000', 5),
+  (6,  'full',    DATE '2027-07-20', NULL,               'https://warranty.example.com/br700',  6),
+  (7,  'partial', DATE '2026-11-11', NULL,               'https://warranty.example.com/sb450',  7),
+  (8,  'full',    DATE '2028-06-30', DATE '2027-06-30',  'https://warranty.example.com/pwr900', 8),
+  (9,  'partial', DATE '2027-02-14', NULL,               'https://warranty.example.com/hb80',   9),
+  (10, 'full',    DATE '2029-08-08', DATE '2028-08-08',  'https://warranty.example.com/plr25',  10);
+
+-- 5. Promocodes: 10 records
+INSERT INTO FitServe.promocodes (
+  promocode_id,
+  code,
+  quantity,
+  is_active
+)
+VALUES
+  (1,  'WELCOME10', 50, true),
+  (2,  'SUMMER25',  30, true),
+  (3,  'FIT2026',   100, true),
+  (4,  'FRIEND15',  20, true),
+  (5,  'STUDENT5',  75, true),
+  (6,  'NEWYEAR20', 10, false),
+  (7,  'SPRING30',  40, true),
+  (8,  'LOYAL50',   15, true),
+  (9,  'PROMO99',   5,  false),
+  (10, 'GYMLOVE',   60, true);
+
+-- 6. Discounts: 10 records
+INSERT INTO FitServe.discounts (
+  discount_id,
+  discount_name,
+  description,
+  start_date,
+  end_date
+)
+VALUES
+  (1,  'Літня знижка',              'Застосовується до всіх типів абонементів у літній період; не поєднується з Різдвяною акцією та Осінньою знижкою через перекриття принципу «одна сезонна знижка за раз», але сумісна зі Знижкою для сімей.', DATE '2026-06-01', DATE '2026-08-31'),
+  (2,  'Знижка новачка',            'Діє лише протягом першого року після реєстрації клієнта; застосовується як єдина знижка на платіж і не підсумовується з жодною іншою активною знижкою.', DATE '2026-01-01', DATE '2026-12-31'),
+  (3,  'Студентська знижка',        'Може поєднуватися зі Знижкою для сімей та Промо для друзів, але виключає одночасне застосування Літньої та Осінньої знижок.', DATE '2026-09-01', DATE '2027-06-30'),
+  (4,  'Знижка для сімей',          'Сумісна з більшістю інших знижок (Студентська, Літня, Осіння, Промо для друзів), крім Знижки новачка, яка завжди застосовується окремо.', DATE '2026-01-01', DATE '2026-12-31'),
+  (5,  'Різдвяна акція',            'Не поєднується з жодною іншою знижкою; при перетині періодів дії має пріоритет над Знижкою на річний абонемент.', DATE '2025-12-01', DATE '2026-01-15'),
+  (6,  'Знижка на річний абонемент','Замінює собою Літню та Осінню знижки при оформленні абонемента одразу на рік; не підсумовується з іншими акціями.', DATE '2026-01-01', DATE '2026-12-31'),
+  (7,  'Промо для друзів',          'Поєднується зі Студентською знижкою та Знижкою для сімей, але не діє одночасно зі Знижкою новачка.', DATE '2026-03-01', DATE '2026-05-31'),
+  (8,  'Весняне оновлення',         'Застосовується лише при продовженні наявного абонемента; не комбінується з Промо для друзів у межах одного платежу.', DATE '2026-03-01', DATE '2026-05-31'),
+  (9,  'Осіння знижка',             'Сумісна зі Знижкою для сімей та Лояльність VIP, але виключає Літню знижку через перекриття правила «одна сезонна акція за раз».', DATE '2026-09-01', DATE '2026-11-30'),
+  (10, 'Лояльність VIP',            'Має найвищий пріоритет серед усіх знижок: якщо застосовується разом з іншою активною знижкою, система враховує лише Лояльність VIP.', DATE '2026-01-01', DATE '2026-12-31');
+
+-- 7. Payment: 10 records
+INSERT INTO FitServe.payment (
+  payment_id,
+  price,
+  payment_method,
+  payment_date,
+  amount_paid,
+  payment_status,
+  pack_subscription_id,
+  promocode_id
+)
+VALUES
+  (1,  500.00,  'card', TIMESTAMP '2026-01-05 10:00:00', 500.00, 'completed',  1,  1),
+  (2,  4800.00, 'card', TIMESTAMP '2026-02-10 11:30:00', 4800.00,'completed',  2,  NULL),
+  (3,  600.00,  'cash', TIMESTAMP '2026-06-20 09:15:00', 600.00, 'completed',  3,  2),
+  (4,  5000.00, 'card', TIMESTAMP '2026-04-10 14:00:00', 5000.00,'completed',  4,  NULL),
+  (5,  700.00,  'card', TIMESTAMP '2026-05-10 12:45:00', 350.00, 'in_process', 5,  3),
+  (6,  650.00,  'cash', TIMESTAMP '2026-06-10 16:20:00', 650.00, 'completed',  6,  NULL),
+  (7,  600.00,  'card', TIMESTAMP '2026-01-10 08:40:00', NULL,   'unpaid',     7,  4),
+  (8,  750.00,  'card', TIMESTAMP '2026-02-12 13:10:00', 375.00, 'in_process', 8,  NULL),
+  (9,  5200.00, 'card', TIMESTAMP '2026-03-15 17:00:00', 5200.00,'completed',  9,  5),
+  (10, 680.00,  'cash', TIMESTAMP '2026-04-14 18:30:00', NULL,   'unpaid',     10, NULL);
+
+-- 8. Payment discount (m:m): 10 records
+INSERT INTO FitServe.payment_discount (
+  payment_discount_id,
+  discount_id,
+  payment_id
+)
+VALUES
+  (1,  1,  1),
+  (2,  2,  2),
+  (3,  3,  3),
+  (4,  4,  4),
+  (5,  5,  5),
+  (6,  6,  6),
+  (7,  7,  7),
+  (8,  8,  8),
+  (9,  9,  9),
+  (10, 10, 10);
+
+-- 9. Pack equipment (m:m): 10 records
+INSERT INTO FitServe.pack_equipment (
+  pack_equipment_id,
+  pack_id,
+  equipment_id
+)
+VALUES
+  (1,  1, 1),
+  (2,  1, 2),
+  (3,  2, 3),
+  (4,  3, 4),
+  (5,  4, 5),
+  (6,  5, 6),
+  (7,  6, 7),
+  (8,  7, 8),
+  (9,  8, 9),
+  (10, 9, 10);
