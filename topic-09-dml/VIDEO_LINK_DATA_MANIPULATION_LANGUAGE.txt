@@ -1,0 +1,28 @@
+https://drive.google.com/file/d/1IIl50kKH5i481cuJQb_BXKg-j6Rc9MNb/view?usp=sharing
+
+Note:
+For the best viewing experience, please select the highest available video quality. The video is available in 1080p.
+
+VIDEO TIMELINE
+
+Speaker 1 — Oleksii Strotskyi
+Role: Team Lead / DML Coordination
+00:05–00:55 — Overview of What Was Accomplished by the Team
+00:55–02:20 — Overview of My Core DML Contributions
+02:20–02:40 — Additional Work Completed by Liliia Dotsenko
+02:40–03:20 — Additional Work Completed by Me
+
+Speaker 2 — Andriy Dehtiarov
+Role: DML & Related Entities Developer
+03:25–04:20 — Overview of Completed Work
+
+Speaker 3 — Liliia Dotsenko
+Role: DML & Constraints Testing Developer
+04:25–06:00 — Overview of Completed Work
+
+TEAM STATUS NOTE
+
+Serhieieva Lidiia and Shtefutsa Oleksandr are no longer part of the team due to inactivity and the low quality of the work delivered. Therefore, they did not participate in the preparation or presentation of this part of the project.
+
+More details about the team members’ responsibilities and contributions:
+https://github.com/db-2026-june/team-01/blob/main/topic-09-dml/TEAMWORK.md
